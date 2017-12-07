@@ -158,6 +158,18 @@
             "ref": "a249484db698d1a847a30291c8f732414ac47e25"
         }
     },
+    "symfony/twig-bridge": {
+        "version": "v4.0.1"
+    },
+    "symfony/twig-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
+        }
+    },
     "symfony/webpack-encore-pack": {
         "version": "1.0",
         "recipe": {
@@ -169,6 +181,9 @@
     },
     "symfony/yaml": {
         "version": "v4.0.1"
+    },
+    "twig/twig": {
+        "version": "v2.4.4"
     },
     "zendframework/zend-code": {
         "version": "3.3.0"
