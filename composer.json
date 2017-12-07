@@ -13,6 +13,7 @@
     },
     "require-dev": {
         "symfony/dotenv": "^4.0",
+        "symfony/phpunit-bridge": "^4.0",
         "symfony/webpack-encore-pack": "^1.0"
     },
     "config": {

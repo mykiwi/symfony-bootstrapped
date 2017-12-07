@@ -8,3 +8,8 @@
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 ###< symfony/webpack-encore-pack ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
