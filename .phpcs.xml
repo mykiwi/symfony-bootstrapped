@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<ruleset name="Project">
+
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+    <rule ref="Generic.Functions.CallTimePassByReference"/>
+
+    <!-- Doctrine Event Constants are not uppercase -->
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <rule ref="Squiz.ControlStructures.ControlSignature"/>
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
+    <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+    <rule ref="Squiz.PHP.CommentedOutCode">
+        <properties>
+            <property name="maxPercentage" value="60"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.MethodScope"/>
+
+    <!-- We provide our own subclass of PEAR's ClassComment and FunctionComment sniff, but these will do: -->
+    <rule ref="PEAR.Commenting.InlineComment"/>
+
+    <!-- Don't enforce Zend's private member underscores -->
+    <rule ref="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Ignore variables that contains numbers -->
+    <rule ref="Zend.NamingConventions.ValidVariableName.ContainsNumbers">
+        <severity>0</severity>
+    </rule>
+
+    <!-- In practice, Symfony2 spaces multiline function calls differently than Zend -->
+    <rule ref="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Functions.FunctionCallSignature.SpaceAfterCloseBracket">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.WhiteSpace.ScopeIndent"/>
+</ruleset>
