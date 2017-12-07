@@ -12,7 +12,8 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "symfony/dotenv": "^4.0"
+        "symfony/dotenv": "^4.0",
+        "symfony/webpack-encore-pack": "^1.0"
     },
     "config": {
         "preferred-install": {

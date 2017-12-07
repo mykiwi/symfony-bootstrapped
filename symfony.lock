@@ -149,6 +149,15 @@
             "ref": "a249484db698d1a847a30291c8f732414ac47e25"
         }
     },
+    "symfony/webpack-encore-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "9954e3835ce82fee2682be8501ce0511bb867812"
+        }
+    },
     "symfony/yaml": {
         "version": "v4.0.1"
     },
