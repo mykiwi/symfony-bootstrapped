@@ -1,7 +1,7 @@
-DOCKER_COMPOSE	= /bin/env docker-compose
+DOCKER_COMPOSE	= docker-compose
 
-EXEC_PHP		= $(DOCKER_COMPOSE) exec php /path/to/container/entrypoint
-EXEC_JS			= $(DOCKER_COMPOSE) exec node /path/to/container/entrypoint
+EXEC_PHP		= $(DOCKER_COMPOSE) exec php /entrypoint
+EXEC_JS			= $(DOCKER_COMPOSE) exec node /entrypoint
 
 SYMFONY			= $(EXEC_PHP) bin/console
 COMPOSER		= $(EXEC_PHP) composer
@@ -35,7 +35,7 @@ stop: ## Stop the project
 clean: ## Stop the project and remove generated files
 clean: kill
 	rm -rf .env vendor
-	$(DOCKER_COMPOSE) down --rmi
+	$(DOCKER_COMPOSE) down
 
 no-docker:
 	$(eval DOCKER_COMPOSE := \#)
@@ -50,23 +50,24 @@ no-docker:
 ## 
 
 db: ## Reset the database and load fixtures
-db: start vendor
-	$(EXEC_PHP) php -r "require('./vendor/autoload.php');for(;;){try{\Doctrine\DBAL\DriverManager::getConnection($$_ENV['DATABASE_URL']);break;}catch(\Exception $$e){}}" # Wait for MySQL
-	$(SYMFONY) doctrine:database:drop --if-exists --force
-	$(SYMFONY) doctrine:database:create --if-not-exists
-	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+db: .env vendor
+	@echo Wait for database
+	@$(EXEC_PHP) php -r "require('./vendor/autoload.php');set_time_limit(30);(new \Symfony\Component\Dotenv\Dotenv())->load('.env');for(;;){try{\Doctrine\DBAL\DriverManager::getConnection(['url' => \$$_ENV['DATABASE_URL']]);break;}catch(\Exception \$$e){}}"
+	-$(SYMFONY) doctrine:database:drop --if-exists --force
+	-$(SYMFONY) doctrine:database:create --if-not-exists
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
 	$(SYMFONY) doctrine:fixtures:load --no-interaction
 
 migration: ## Generate a new doctrine migration
-migration: start vendor
+migration: vendor
 	$(SYMFONY) doctrine:migrations:diff
 
 assets: ## Run Webpack Encore to compile assets
-assets: start node_modules
+assets: node_modules
 	$(YARN) run dev
 
 watch: ## Run Webpack Encore in watch mode
-watch: start node_modules
+watch: node_modules
 	$(YARN) run watch
 
 .PHONY: db migration assets watch
@@ -80,11 +81,11 @@ tests: ## Run unit and functional tests
 	@make -j tu tf
 
 tu: ## Run unit tests
-tu: start vendor
+tu: vendor
 	$(EXEC_PHP) bin/phpunit --exclude-group functional
 
 tf: ## Run functional tests
-tf: start vendor
+tf: vendor
 	$(EXEC_PHP) bin/phpunit --group functional
 
 .PHONY: tests tu tf
@@ -124,14 +125,14 @@ ARTEFACTS = var/artefacts
 lint: ## Lints twig and yaml files
 lint: lt ly
 
-lt: start vendor
+lt: vendor
 	$(SYMFONY) lint:twig templates
 
-ly: start vendor
+ly: vendor
 	$(SYMFONY) lint:yaml config
 
 security: ## Check security of your dependencies
-security: start vendor
+security: vendor
 	$(EXEC_PHP) ./vendor/bin/security-checker security:check
 
 phploc: ## PHPLoc (https://github.com/sebastianbergmann/phploc)
