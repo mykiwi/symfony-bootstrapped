@@ -1,11 +1,11 @@
-DOCKER_COMPOSE	= docker-compose
+DOCKER_COMPOSE  = docker-compose
 
-EXEC_PHP		= $(DOCKER_COMPOSE) exec php /entrypoint
-EXEC_JS			= $(DOCKER_COMPOSE) exec node /entrypoint
+EXEC_PHP        = $(DOCKER_COMPOSE) exec php /entrypoint
+EXEC_JS         = $(DOCKER_COMPOSE) exec node /entrypoint
 
-SYMFONY			= $(EXEC_PHP) bin/console
-COMPOSER		= $(EXEC_PHP) composer
-YARN			= $(EXEC_JS) yarn
+SYMFONY         = $(EXEC_PHP) bin/console
+COMPOSER        = $(EXEC_PHP) composer
+YARN            = $(EXEC_JS) yarn
 
 ## 
 ## Project
@@ -34,13 +34,12 @@ stop: ## Stop the project
 
 clean: ## Stop the project and remove generated files
 clean: kill
-	rm -rf .env vendor
-	$(DOCKER_COMPOSE) down
+	rm -rf .env vendor node_modules
 
 no-docker:
 	$(eval DOCKER_COMPOSE := \#)
 	$(eval EXEC_PHP := )
-	$(eval EXEC_NODE := )
+	$(eval EXEC_JS := )
 
 .PHONY: build kill install reset start stop clean no-docker
 
@@ -78,7 +77,7 @@ watch: node_modules
 ## 
 
 tests: ## Run unit and functional tests
-	@make -j tu tf
+tests: tu tf
 
 tu: ## Run unit tests
 tu: vendor
@@ -131,7 +130,7 @@ lt: vendor
 ly: vendor
 	$(SYMFONY) lint:yaml config
 
-security: ## Check security of your dependencies
+security: ## Check security of your dependencies (https://security.sensiolabs.org/)
 security: vendor
 	$(EXEC_PHP) ./vendor/bin/security-checker security:check
 
@@ -149,7 +148,7 @@ pdepend: artefacts
 phpmd: ## PHP Mess Detector (https://phpmd.org)
 	$(QA) phpmd src text .phpmd.xml
 
-php_codesnifer: ## PHP_CodeSnifer (https://github.com/squizlabs/PHP_CodeSniffer)
+phpcodesnifer: ## PHP_CodeSnifer (https://github.com/squizlabs/PHP_CodeSniffer)
 	$(QA) phpcs -v --standard=.phpcs.xml src
 
 phpcpd: ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
@@ -162,16 +161,16 @@ phpmetrics: ## PhpMetrics (http://www.phpmetrics.org)
 phpmetrics: artefacts
 	$(QA) phpmetrics --report-html=$(ARTEFACTS)/phpmetrics src
 
-php-cs-fixer: ## php-cs-fixer (http://cs.sensiolabs.org)
+cs: ## php-cs-fixer (http://cs.sensiolabs.org)
 	$(QA) php-cs-fixer fix --dry-run --using-cache=no --verbose --diff
 
-apply-php-cs-fixer: ## apply php-cs-fixer fixes
+apply-cs: ## apply php-cs-fixer fixes
 	$(QA) php-cs-fixer fix --using-cache=no --verbose --diff
 
 artefacts:
 	mkdir -p $(ARTEFACTS)
 
-.PHONY: lint lt ly phploc pdepend phpmd php_codesnifer phpcpd phpdcd phpmetrics php-cs-fixer apply-php-cs-fixer artefacts
+.PHONY: lint lt ly phploc pdepend phpmd phpcodesnifer phpcpd phpdcd phpmetrics cs apply-cs artefacts
 
 
 
