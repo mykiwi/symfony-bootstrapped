@@ -119,6 +119,15 @@
     "symfony/debug": {
         "version": "v4.0.1"
     },
+    "symfony/debug-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "de31e687f3964939abd1f66817bd96ed34bc2eee"
+        }
+    },
     "symfony/dependency-injection": {
         "version": "v4.0.1"
     },
@@ -173,6 +182,12 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.6.0"
     },
+    "symfony/polyfill-php72": {
+        "version": "v1.6.0"
+    },
+    "symfony/profiler-pack": {
+        "version": "v1.0.2"
+    },
     "symfony/routing": {
         "version": "3.3",
         "recipe": {
@@ -181,6 +196,9 @@
             "version": "3.3",
             "ref": "a249484db698d1a847a30291c8f732414ac47e25"
         }
+    },
+    "symfony/stopwatch": {
+        "version": "v4.0.1"
     },
     "symfony/twig-bridge": {
         "version": "v4.0.1"
@@ -192,6 +210,18 @@
             "branch": "master",
             "version": "3.3",
             "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
+        }
+    },
+    "symfony/var-dumper": {
+        "version": "v4.0.1"
+    },
+    "symfony/web-profiler-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
         }
     },
     "symfony/webpack-encore-pack": {
