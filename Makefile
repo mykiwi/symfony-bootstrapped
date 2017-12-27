@@ -50,12 +50,11 @@ no-docker:
 
 db: ## Reset the database and load fixtures
 db: .env vendor
-	@echo Wait for database
-	@$(EXEC_PHP) php -r "require('./vendor/autoload.php');set_time_limit(30);(new \Symfony\Component\Dotenv\Dotenv())->load('.env');for(;;){try{\Doctrine\DBAL\DriverManager::getConnection(['url' => \$$_ENV['DATABASE_URL']]);break;}catch(\Exception \$$e){}}"
+	@$(EXEC_PHP) php -r 'echo "Wait database...\n"; set_time_limit(15); require __DIR__."/vendor/autoload.php"; (new \Symfony\Component\Dotenv\Dotenv())->load(__DIR__."/.env"); $$u = parse_url(getenv("DATABASE_URL")); for(;;) { if(@fsockopen($$u["host"].":".($$u["port"] ?? 3306))) { break; }}'
 	-$(SYMFONY) doctrine:database:drop --if-exists --force
 	-$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
-	$(SYMFONY) doctrine:fixtures:load --no-interaction
+	$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
 
 migration: ## Generate a new doctrine migration
 migration: vendor
@@ -118,7 +117,7 @@ yarn.lock: package.json
 ## -----------------
 ## 
 
-QA = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.1
+QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.1
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files
