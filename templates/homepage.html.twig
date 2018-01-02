@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for entity in entities %}
+        {{ entity.bar }}<br/>
+    {% endfor %}
+{% endblock %}
