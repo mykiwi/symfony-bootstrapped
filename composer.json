@@ -1,4 +1,6 @@
 {
+    "name": "mykiwi/symfony-bootstrapped",
+    "description": "Symfony bootstrapped",
     "type": "project",
     "license": "proprietary",
     "require": {
