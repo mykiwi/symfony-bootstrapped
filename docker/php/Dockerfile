@@ -1,6 +1,6 @@
 FROM composer
 
-FROM php:7.1-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
@@ -16,7 +16,8 @@ RUN apk add --no-cache \
         $PHPIZE_DEPS \
         icu-dev && \
     docker-php-ext-install \
-        intl && \
+        intl \
+        zip && \
     pecl install apcu-${APCU_VERSION} && \
     docker-php-ext-enable apcu && \
     docker-php-ext-enable opcache && \

@@ -1,0 +1,129 @@
+stages:
+  - docker
+  - tests
+  - quality-assurance
+  - deploy
+
+image: mykiwi/docker
+services:
+- docker:dind
+variables:
+  DOCKER_DRIVER: overlay2
+  COMPOSE_FILE: "docker-compose.yml:docker-compose.gitlab-ci.yml"
+
+.template-load-gitlab-image: &internal-image
+  before_script:
+    - cp -f .env.dist .env
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker-compose pull php node || true
+
+.template-docker: &external-image
+  before_script:
+    - cp -f .env.dist .env
+
+build-docker-images:
+  <<: *internal-image
+  stage: docker
+  script:
+    - docker-compose build --pull
+    - docker-compose push
+  only:
+    - master
+
+tests:
+  <<: *internal-image
+  stage: tests
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+  script:
+    - make start
+    - make test
+  artifacts:
+    paths:
+      - var/artefacts/coverage/
+    expire_in: 1 week
+
+check-security:
+  <<: *internal-image
+  stage: quality-assurance
+  script:
+    - make start
+    - make security
+
+check-yaml-files:
+  <<: *internal-image
+  stage: quality-assurance
+  script:
+    - make start
+    - make ly
+
+check-twig-files:
+  <<: *internal-image
+  stage: quality-assurance
+  script:
+    - make start
+    - make lt
+
+phpmd:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make phpmd || true # Bug with php 7.1
+
+php_codesnifer:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make php_codesnifer
+
+php-cs-fixer:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make php-cs-fixer
+
+phpcpd:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make phpcpd
+
+phploc:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make phploc
+
+pdepend:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make pdepend
+  artifacts:
+    paths:
+      - var/artefacts/pdepend_summary.xml
+      - var/artefacts/pdepend_jdepend.svg
+      - var/artefacts/pdepend_pyramid.svg
+    expire_in: 1 week
+
+phpmetrics:
+  <<: *external-image
+  stage: quality-assurance
+  script:
+    - make phpmetrics
+  artifacts:
+    paths:
+      - var/artefacts/phpmetrics
+    expire_in: 1 week
+
+ci-report:
+  stage: deploy
+  only:
+    - master
+  script:
+    - rm -rf public/*
+    - cp .gitlab-pages.html var/artefacts/index.html
+    - sed -i "s/PLACEHOLDER_GIT_COMMIT/${CI_COMMIT_SHA}/g" var/artefacts/index.html
+    - cp -R var/artefacts/* public/
+  artifacts:
+    paths:
+      - public

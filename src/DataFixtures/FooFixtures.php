@@ -10,7 +10,7 @@ class FooFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $foo = new Foo();
             $foo->setBar('bar '.$i);
             $manager->persist($foo);

@@ -31,7 +31,7 @@ class Foo
     {
         return $this->bar;
     }
-    
+
     public function setBar(string $bar): void
     {
         $this->bar = $bar;

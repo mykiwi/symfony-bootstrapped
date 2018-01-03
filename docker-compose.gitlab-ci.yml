@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+  php:
+    image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:php
+    build:
+      cache_from:
+        - ${CI_REGISTRY}/${CI_PROJECT_PATH}:php
+
+  node:
+    image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:node
+    build:
+      cache_from:
+        - ${CI_REGISTRY}/${CI_PROJECT_PATH}:node

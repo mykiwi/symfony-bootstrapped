@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
   database:
@@ -17,13 +17,15 @@ services:
       - ./public/:/srv/public/:ro
 
   php:
-    build: ./docker/php
+    build:
+      context: ./docker/php
     working_dir: /srv
     volumes:
       - ./:/srv/
 
   node:
-    build: ./docker/node
+    build:
+      context: ./docker/node
     working_dir: /srv
     volumes:
       - ./:/srv/

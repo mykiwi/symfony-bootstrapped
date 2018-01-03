@@ -1,7 +1,7 @@
 DOCKER_COMPOSE  = docker-compose
 
-EXEC_PHP        = $(DOCKER_COMPOSE) exec php /entrypoint
-EXEC_JS         = $(DOCKER_COMPOSE) exec node /entrypoint
+EXEC_PHP        = $(DOCKER_COMPOSE) exec -T php /entrypoint
+EXEC_JS         = $(DOCKER_COMPOSE) exec -T node /entrypoint
 
 SYMFONY         = $(EXEC_PHP) bin/console
 COMPOSER        = $(EXEC_PHP) composer
@@ -75,8 +75,8 @@ watch: node_modules
 ## -----
 ## 
 
-tests: ## Run unit and functional tests
-tests: tu tf
+test: ## Run unit and functional tests
+test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
@@ -117,7 +117,7 @@ yarn.lock: package.json
 ## -----------------
 ## 
 
-QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.1
+QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files
@@ -147,7 +147,7 @@ pdepend: artefacts
 phpmd: ## PHP Mess Detector (https://phpmd.org)
 	$(QA) phpmd src text .phpmd.xml
 
-phpcodesnifer: ## PHP_CodeSnifer (https://github.com/squizlabs/PHP_CodeSniffer)
+php_codesnifer: ## PHP_CodeSnifer (https://github.com/squizlabs/PHP_CodeSniffer)
 	$(QA) phpcs -v --standard=.phpcs.xml src
 
 phpcpd: ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
@@ -160,16 +160,16 @@ phpmetrics: ## PhpMetrics (http://www.phpmetrics.org)
 phpmetrics: artefacts
 	$(QA) phpmetrics --report-html=$(ARTEFACTS)/phpmetrics src
 
-cs: ## php-cs-fixer (http://cs.sensiolabs.org)
+php-cs-fixer: ## php-cs-fixer (http://cs.sensiolabs.org)
 	$(QA) php-cs-fixer fix --dry-run --using-cache=no --verbose --diff
 
-apply-cs: ## apply php-cs-fixer fixes
+apply-php-cs-fixer: ## apply php-cs-fixer fixes
 	$(QA) php-cs-fixer fix --using-cache=no --verbose --diff
 
 artefacts:
 	mkdir -p $(ARTEFACTS)
 
-.PHONY: lint lt ly phploc pdepend phpmd phpcodesnifer phpcpd phpdcd phpmetrics cs apply-cs artefacts
+.PHONY: lint lt ly phploc pdepend phpmd php_codesnifer phpcpd phpdcd phpmetrics php-cs-fixer apply-php-cs-fixer artefacts
 
 
 
