@@ -60,6 +60,10 @@ migration: ## Generate a new doctrine migration
 migration: vendor
 	$(SYMFONY) doctrine:migrations:diff
 
+db-validate-schema: ## Validate the doctrine ORM mapping
+db-validate-schema: .env vendor
+	$(SYMFONY) doctrine:schema:validate
+
 assets: ## Run Webpack Encore to compile assets
 assets: node_modules
 	$(YARN) run dev
