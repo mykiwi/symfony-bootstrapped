@@ -81,6 +81,13 @@ php-cs-fixer:
   script:
     - make php-cs-fixer
 
+eslint:
+  <<: *internal-image
+  stage: quality-assurance
+  script:
+    - make start
+    - make eslint
+
 phpcpd:
   <<: *external-image
   stage: quality-assurance

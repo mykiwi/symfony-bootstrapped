@@ -101,9 +101,10 @@ vendor: composer.lock
 
 node_modules: yarn.lock
 	$(YARN) install
+	@touch -c node_modules
 
 yarn.lock: package.json
-	@echo yarn.lock is not up to date.
+	$(YARN) upgrade
 
 .env: .env.dist
 	@if [ -f .env ]; \
@@ -172,6 +173,10 @@ apply-php-cs-fixer: ## apply php-cs-fixer fixes
 
 twigcs: ## twigcs (https://github.com/allocine/twigcs)
 	$(QA) twigcs lint templates
+
+eslint: ## eslint (https://eslint.org/)
+eslint: node_modules
+	$(EXEC_JS) node_modules/.bin/eslint --fix-dry-run assets/js/**
 
 artefacts:
 	mkdir -p $(ARTEFACTS)
