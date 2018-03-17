@@ -170,6 +170,9 @@ php-cs-fixer: ## php-cs-fixer (http://cs.sensiolabs.org)
 apply-php-cs-fixer: ## apply php-cs-fixer fixes
 	$(QA) php-cs-fixer fix --using-cache=no --verbose --diff
 
+twigcs: ## twigcs (https://github.com/allocine/twigcs)
+	$(QA) twigcs lint templates
+
 artefacts:
 	mkdir -p $(ARTEFACTS)
 
