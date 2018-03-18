@@ -1,3 +1,9 @@
-#index:
-#    path: /
-#    defaults: { _controller: 'App\Controller\DefaultController::index' }
+index:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /pizza
+
+controllers:
+    resource: '../src/Controller/'
+    type:     annotation
