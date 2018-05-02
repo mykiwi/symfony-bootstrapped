@@ -126,13 +126,14 @@ QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files
-lint: lt ly
+lint: lt# ly
 
 lt: vendor
 	$(SYMFONY) lint:twig templates
 
-ly: vendor
-	$(SYMFONY) lint:yaml config
+# uncomment to parse non kernel configuration files, like fixtures
+#ly: vendor
+#	$(SYMFONY) lint:yaml data
 
 security: ## Check security of your dependencies (https://security.sensiolabs.org/)
 security: vendor
