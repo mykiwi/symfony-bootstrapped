@@ -72,8 +72,11 @@ watch: ## Run Webpack Encore in watch mode
 watch: node_modules
 	$(YARN) run watch
 
-.PHONY: db migration assets watch
+console: ## Run a console commands using cmd arguments e.g. to clear the cache : make console cmd="cacher:clear"
+console: vendor
+	$(SYMFONY) $(cmd)
 
+.PHONY: db migration assets watch console
 ## 
 ## Tests
 ## -----
