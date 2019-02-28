@@ -90,7 +90,7 @@ tf: ## Run functional tests
 tf: vendor
 	$(EXEC_PHP) bin/phpunit --group functional
 
-.PHONY: tests tu tf
+.PHONY: test tu tf
 
 # rules based on files
 composer.lock: composer.json
