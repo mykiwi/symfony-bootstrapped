@@ -1,4 +1,4 @@
-FROM node:9.2-alpine
+FROM node:11-alpine
 
 RUN apk add --no-cache su-exec && \
     addgroup bar && \

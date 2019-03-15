@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   database:
-    image: mariadb:10.3
+    image: mariadb:10.4
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     volumes:
