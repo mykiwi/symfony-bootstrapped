@@ -21,13 +21,12 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "sensiolabs/security-checker": "^5.0",
+        "sensiolabs/security-checker": "^6.0",
         "symfony/debug-bundle": "^4.0",
         "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
-        "symfony/profiler-pack": "^1.0",
-        "symfony/webpack-encore-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0"
     },
     "config": {
         "preferred-install": {
