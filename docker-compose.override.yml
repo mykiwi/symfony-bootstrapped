@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  http:
+    ports:
+      - "8080:80"
+  h2-proxy:
+    ports:
+      - "8443:443"
