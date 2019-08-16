@@ -6,11 +6,17 @@ version: '3.6'
 
 
 services:
+  database:
+    ports:
+#    - target: 3306
+#      published: 3306
+
   http:
     ports:
 #    - target: 80
 #      published: 80
-  h2-proxy:
+
+  https:
     ports:
 #    - target: 8443
 #      published: 443
