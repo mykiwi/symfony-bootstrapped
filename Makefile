@@ -134,9 +134,16 @@ lt: vendor
 ly: vendor
 	$(SYMFONY) lint:yaml config
 
-security: ## Check security of your dependencies (https://security.sensiolabs.org/)
-security: vendor
+security: ## Check security of your dependencies
+security: audit-vendor audit-node_modules
+
+audit-vendor: ## (github.com/sensiolabs/security-checker)
+audit-vendor: vendor
 	$(EXEC_PHP) ./vendor/bin/security-checker security:check
+
+audit-node_modules: ## npm audit (https://docs.npmjs.com/cli/audit)
+audit-node_modules: node_modules
+	$(YARN) audit
 
 phploc: ## PHPLoc (https://github.com/sebastianbergmann/phploc)
 	$(QA) phploc src/

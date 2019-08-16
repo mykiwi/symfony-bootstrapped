@@ -1,0 +1,19 @@
+name: Security
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - run: make start vendor node_modules
+
+      - name: sensiolabs/security-checker
+        run: make audit-vendor
+
+      - name: yarn audit
+        run: make audit-node_modules
