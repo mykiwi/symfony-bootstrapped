@@ -122,7 +122,7 @@ yarn.lock: package.json
 ## -----------------
 ## 
 
-QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
+QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.3
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files
