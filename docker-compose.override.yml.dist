@@ -1,9 +1,16 @@
 version: '3.6'
 
+## Reminder about ports
+##   target    = container port
+##   published = localhost port
+
+
 services:
   http:
     ports:
-      - "8080:80"
+#    - target: 80
+#      published: 80
   h2-proxy:
     ports:
-      - "8443:443"
+#    - target: 8443
+#      published: 443
