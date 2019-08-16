@@ -32,7 +32,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.6",
-            "ref": "02bc9e7994b70f4fda004131a0c78b7b1bf09789"
+            "ref": "5e476e8edf3fa8e7f045ad034f89bb464424f5c1"
         },
         "files": [
             "config/packages/doctrine.yaml",
@@ -99,6 +99,9 @@
     "nikic/php-parser": {
         "version": "v4.2.2"
     },
+    "ocramius/package-versions": {
+        "version": "1.4.0"
+    },
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
@@ -129,7 +132,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.0",
-            "ref": "05daf6b214e54aed4089f3480f944a67ac3a7889"
+            "ref": "160c9b600564faa1224e8f387d49ef13ceb8b793"
         },
         "files": [
             "config/packages/security_checker.yaml"
@@ -220,7 +223,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.2",
-            "ref": "0dfae0b1cd8349ae47659b35602f772b4a7e2280"
+            "ref": "61ad963f28c091b8bb9449507654b9c7d8bbb53c"
         },
         "files": [
             "config/bootstrap.php",
@@ -315,7 +318,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.2",
-            "ref": "5374e24d508ba8fd6ba9eb15170255fdb778316a"
+            "ref": "4c107a8d23a16b997178fbd4103b8d2f54f688b7"
         },
         "files": [
             "config/packages/dev/routing.yaml",
@@ -395,7 +398,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.0",
-            "ref": "052f6a3782cb7ac3506f21c2f0a05403a69247c4"
+            "ref": "faa1c4972a2b855edc2e113bcf9e1d84b02bf1de"
         },
         "files": [
             "assets/css/app.css",
