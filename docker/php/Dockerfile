@@ -1,16 +1,17 @@
 FROM composer
 
-FROM php:7.2-fpm-alpine
+FROM php:7.3-fpm-alpine
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
-ENV APCU_VERSION 5.1.8
+ENV APCU_VERSION 5.1.17
 
 RUN apk add --no-cache \
         ca-certificates \
         icu-libs \
         git \
         unzip \
+        libzip-dev \
         zlib-dev && \
     apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \

@@ -21,7 +21,7 @@ kill:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
 
 install: ## Install and start the project
-install: .env build start assets db
+install: .env.local build start assets db
 
 reset: ## Stop and start a fresh install of the project
 reset: kill install
@@ -34,7 +34,7 @@ stop: ## Stop the project
 
 clean: ## Stop the project and remove generated files
 clean: kill
-	rm -rf .env vendor node_modules
+	rm -rf .env.local vendor node_modules
 
 no-docker:
 	$(eval DOCKER_COMPOSE := \#)
@@ -49,8 +49,8 @@ no-docker:
 ## 
 
 db: ## Reset the database and load fixtures
-db: .env vendor
-	@$(EXEC_PHP) php -r 'echo "Wait database...\n"; set_time_limit(15); require __DIR__."/vendor/autoload.php"; (new \Symfony\Component\Dotenv\Dotenv())->load(__DIR__."/.env"); $$u = parse_url(getenv("DATABASE_URL")); for(;;) { if(@fsockopen($$u["host"].":".($$u["port"] ?? 3306))) { break; }}'
+db: .env.local vendor
+	@$(EXEC_PHP) php -r 'echo "Wait database...\n"; set_time_limit(30); require __DIR__."/config/bootstrap.php"; $$u = parse_url($$_ENV["DATABASE_URL"]); for(;;) { if(@fsockopen($$u["host"].":".($$u["port"] ?? 3306))) { break; }}'
 	-$(SYMFONY) doctrine:database:drop --if-exists --force
 	-$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
@@ -61,7 +61,7 @@ migration: vendor
 	$(SYMFONY) doctrine:migrations:diff
 
 db-validate-schema: ## Validate the doctrine ORM mapping
-db-validate-schema: .env vendor
+db-validate-schema: .env.local vendor
 	$(SYMFONY) doctrine:schema:validate
 
 assets: ## Run Webpack Encore to compile assets
@@ -106,15 +106,15 @@ node_modules: yarn.lock
 yarn.lock: package.json
 	$(YARN) upgrade
 
-.env: .env.dist
+.env.local: .env.local.docker
 	@if [ -f .env ]; \
 	then\
-		echo '\033[1;41m/!\ The .env.dist file has changed. Please check your .env file (this message will not be displayed again).\033[0m';\
-		touch .env;\
+		echo '\033[1;41m/!\ The .env.local.docker file has changed. Please check your .env.local file (this message will not be displayed again).\033[0m';\
+		touch .env.local;\
 		exit 1;\
 	else\
-		echo cp .env.dist .env;\
-		cp .env.dist .env;\
+		echo cp .env.local.docker .env.local;\
+		cp .env.local.docker .env.local;\
 	fi
 
 ## 
@@ -122,7 +122,7 @@ yarn.lock: package.json
 ## -----------------
 ## 
 
-QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
+QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.3
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files

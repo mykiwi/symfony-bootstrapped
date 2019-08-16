@@ -3,7 +3,3 @@ index:
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
     defaults:
         path: /pizza
-
-controllers:
-    resource: '../src/Controller/'
-    type:     annotation

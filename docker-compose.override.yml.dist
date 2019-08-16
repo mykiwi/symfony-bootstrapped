@@ -1,0 +1,22 @@
+version: '3.7'
+
+## Reminder about ports
+##   target    = container port
+##   published = localhost port
+
+
+services:
+  database:
+    ports:
+#    - target: 3306
+#      published: 3306
+
+  http:
+    ports:
+#    - target: 80
+#      published: 80
+
+  https:
+    ports:
+#    - target: 8443
+#      published: 443

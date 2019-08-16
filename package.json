@@ -1,7 +1,7 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.17.0",
-        "eslint": "^4.19.0"
+        "@symfony/webpack-encore": "^0.27",
+        "eslint": "^6.0"
     },
     "license": "UNLICENSED",
     "private": true,

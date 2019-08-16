@@ -1,3 +1,3 @@
-index:
-    path:      /
-    controller: App\Controller\HomepageController::index
+controllers:
+    resource: ../../src/Controller/
+    type: annotation
