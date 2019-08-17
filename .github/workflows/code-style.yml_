@@ -17,7 +17,9 @@ jobs:
         run: make twigcs
 
       - name: eslint
-        run: make eslint
+        run: |
+          docker-compose up -d node
+          make eslint
 
 #      - name: phpstan
 #        run: make phpstan
