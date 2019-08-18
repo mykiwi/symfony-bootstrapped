@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v1
+      - name: docker login registry
+        run: docker login --username ${GITHUB_ACTOR} --password ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }} docker.pkg.github.com
+      - name: make build
+        run: |
+          export CI_PROJECT_PATH=${GITHUB_REPOSITORY}/ci/${GITHUB_REF} \
+                 CI_REGISTRY=docker.pkg.github.com \
+                 COMPOSE_FILE=docker-compose.yml:docker-compose.gitlab-ci.yml
+          make build
+          docker images

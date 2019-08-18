@@ -1,0 +1,25 @@
+name: Code style
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: php-cs-fixer
+        run: make php-cs-fixer
+
+      - name: twigcs
+        run: make twigcs
+
+      - name: eslint
+        run: |
+          docker-compose up -d node
+          make eslint
+
+#      - name: phpstan
+#        run: make phpstan
