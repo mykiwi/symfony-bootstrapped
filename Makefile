@@ -84,11 +84,11 @@ test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
-	$(EXEC_PHP) bin/phpunit --exclude-group functional
+	$(EXEC_PHP) vendor/bin/simple-phpunit --exclude-group functional
 
 tf: ## Run functional tests
 tf: vendor
-	$(EXEC_PHP) bin/phpunit --group functional
+	$(EXEC_PHP) vendor/bin/simple-phpunit --group functional
 
 .PHONY: test tu tf
 
