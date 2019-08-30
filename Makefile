@@ -176,7 +176,7 @@ twigcs: ## twigcs (https://github.com/allocine/twigcs)
 
 eslint: ## eslint (https://eslint.org/)
 eslint: node_modules
-	$(EXEC_JS) node_modules/.bin/eslint --fix-dry-run assets/js/**
+	$(EXEC_JS) node_modules/.bin/eslint --fix-dry-run "assets/js/**"
 
 artefacts:
 	mkdir -p $(ARTEFACTS)
