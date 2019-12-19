@@ -107,7 +107,7 @@ yarn.lock: package.json
 	$(YARN) upgrade
 
 .env.local: .env.local.docker
-	@if [ -f .env ]; \
+	@if [ -f .env.local ]; \
 	then\
 		echo '\033[1;41m/!\ The .env.local.docker file has changed. Please check your .env.local file (this message will not be displayed again).\033[0m';\
 		touch .env.local;\
