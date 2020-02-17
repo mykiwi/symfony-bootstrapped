@@ -43,6 +43,16 @@
         </whitelist>
     </filter>
 
+    <logging>
+        <log type="coverage-html"
+             target="./var/artefacts/coverage"
+             lowUpperBound="40"
+             highLowerBound="75"
+             showUncoveredFiles="false"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="junit" target="./var/artefacts/report.xml" />
+    </logging>
+
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
