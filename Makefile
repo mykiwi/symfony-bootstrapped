@@ -84,7 +84,7 @@ test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
-	$(EXEC_PHP) bin/phpunit --exclude-group functional
+	$(EXEC_PHP) bin/phpunit --exclude-group functional -c phpunit.coverage.xml
 
 tf: ## Run functional tests
 tf: vendor

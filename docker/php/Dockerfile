@@ -33,6 +33,11 @@ RUN apk add --no-cache \
     addgroup bar && \
     adduser -D -h /home -s /bin/sh -G bar foo
 
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
+  && pecl install xdebug \
+  && docker-php-ext-enable xdebug \
+  && apk del pcre-dev ${PHPIZE_DEPS}
+
 ADD entrypoint.sh /entrypoint
 
 ENTRYPOINT ["/entrypoint"]
