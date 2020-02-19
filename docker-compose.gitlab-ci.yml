@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   php:
-    image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:php
+    image: ${CI_REGISTRY_IMAGE}:php
     build:
       cache_from:
-        - ${CI_REGISTRY}/${CI_PROJECT_PATH}:php
+        - ${CI_REGISTRY_IMAGE}:php
 
   node:
-    image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:node
+    image: ${CI_REGISTRY_IMAGE}:node
     build:
       cache_from:
-        - ${CI_REGISTRY}/${CI_PROJECT_PATH}:node
+        - ${CI_REGISTRY_IMAGE}:node

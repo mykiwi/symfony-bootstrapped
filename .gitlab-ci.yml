@@ -38,6 +38,8 @@ tests:
     - make start
     - make test
   artifacts:
+    reports:
+      junit: var/artefacts/report.xml
     paths:
       - var/artefacts/coverage/
     expire_in: 1 week
