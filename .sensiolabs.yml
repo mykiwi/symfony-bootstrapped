@@ -1,2 +1,0 @@
-commit_failure_conditions:
-    - 'project.grade < platinum'
