@@ -1,4 +1,7 @@
 {
+    "monolog/monolog": {
+        "version": "2.5.0"
+    },
     "psr/cache": {
         "version": "3.0.0"
     },
@@ -30,6 +33,18 @@
         },
         "files": [
             "bin/console"
+        ]
+    },
+    "symfony/debug-bundle": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "5aa8aa48234c8eb6dbdd7b3cd5d791485d2cec4b"
+        },
+        "files": [
+            "config/packages/debug.yaml"
         ]
     },
     "symfony/dependency-injection": {
@@ -93,6 +108,21 @@
     "symfony/http-kernel": {
         "version": "v6.0.8"
     },
+    "symfony/monolog-bridge": {
+        "version": "v6.0.3"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.7",
+            "ref": "213676c4ec929f046dfde5ea8e97625b81bc0578"
+        },
+        "files": [
+            "config/packages/monolog.yaml"
+        ]
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.25.0"
     },
@@ -124,8 +154,30 @@
     "symfony/service-contracts": {
         "version": "v3.0.1"
     },
+    "symfony/stopwatch": {
+        "version": "v6.0.5"
+    },
     "symfony/string": {
         "version": "v6.0.8"
+    },
+    "symfony/translation-contracts": {
+        "version": "v3.0.1"
+    },
+    "symfony/twig-bridge": {
+        "version": "v6.0.8"
+    },
+    "symfony/twig-bundle": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.4",
+            "ref": "bb2178c57eee79e6be0b297aa96fc0c0def81387"
+        },
+        "files": [
+            "config/packages/twig.yaml",
+            "templates/base.html.twig"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v6.0.8"
@@ -133,7 +185,23 @@
     "symfony/var-exporter": {
         "version": "v6.0.8"
     },
+    "symfony/web-profiler-bundle": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "24bbc3d84ef2f427f82104f766014e799eefcc3e"
+        },
+        "files": [
+            "config/packages/web_profiler.yaml",
+            "config/routes/web_profiler.yaml"
+        ]
+    },
     "symfony/yaml": {
         "version": "v6.0.3"
+    },
+    "twig/twig": {
+        "version": "v3.3.10"
     }
 }

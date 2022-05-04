@@ -15,6 +15,10 @@
         "symfony/yaml": "6.0.*"
     },
     "require-dev": {
+        "symfony/debug-bundle": "6.0.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*"
     },
     "config": {
         "allow-plugins": {
